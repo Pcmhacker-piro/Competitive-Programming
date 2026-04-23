@@ -1,3 +1,5 @@
+//O(E) + O(nE) + O(nE) ≈ O(nE)
+
 void BellmanFord(int n, int src, vector<pair<int, ll>> *edges, vector<ll>& dist, set<int>& negCycle) {
 	fill(all(dist), INF);
 	dist[src] = 0;
