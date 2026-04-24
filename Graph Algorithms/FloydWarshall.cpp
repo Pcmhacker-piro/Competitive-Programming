@@ -24,3 +24,9 @@ void FloydWarshall(int n, vector<pair<int, ll>> *adj, vector<vector<ll>> &dist) 
 		}
 	}
 }
+
+for (int i = 0; i < n; i++) {
+    if (dist[i][i] < 0) {
+        cout << "Negative Cycle detected\n";
+    }
+}
