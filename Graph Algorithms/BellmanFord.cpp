@@ -7,40 +7,32 @@ Bellman-Ford Algorithm:
 */
 //O(E) + O(nE) + O(nE) ≈ O(nE)
 
-void BellmanFord(int n, int src, vector<pair<int, ll>> *edges, vector<ll>& dist, set<int>& negCycle) {
-    
-    fill(all(dist), INF);
+#include <bits/stdc++.h>
+using namespace std;
+struct Edge {
+    int u, v, w;
+};
+
+vector<int> bellmanFord(int n, vector<Edge> &edges, int src) {
+    vector<int> dist(n + 1, 1e9);
     dist[src] = 0;
 
-    vector<pair<ll, pair<int, int>>> e;
-
-    // build edge list
-    for (int i = 0; i < n; i++) {
-        for (auto j : edges[i]) {
-            e.push_back({j.second, {i, j.first}});
-        }
-    }
-
-    // relax edges
-    for (int i = 0; i < n - 1; i++) {
-        for (auto j : e) {
-            if (dist[j.second.first] != INF &&
-                dist[j.second.first] + j.first < dist[j.second.second]) {
-                
-                dist[j.second.second] = dist[j.second.first] + j.first;
+    // Relax edges (n-1) times
+    for (int i = 1; i <= n - 1; i++) {
+        for (auto &e : edges) {
+            if (dist[e.u] != 1e9 && dist[e.u] + e.w < dist[e.v]) {
+                dist[e.v] = dist[e.u] + e.w;
             }
         }
     }
 
-    // negative cycle
-    for (int i = 0; i < n; i++) {
-        for (auto j : e) {
-            if (dist[j.second.first] != INF &&
-                dist[j.second.first] + j.first < dist[j.second.second]) {
-                
-                dist[j.second.second] = dist[j.second.first] + j.first;
-                negCycle.insert(j.second.second);
-            }
+    // Check for negative cycle
+    for (auto &e : edges) {
+        if (dist[e.u] != 1e9 && dist[e.u] + e.w < dist[e.v]) {
+            cout << "Negative cycle detected\n";
+            return {};
         }
     }
+
+    return dist;
 }
