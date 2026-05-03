@@ -3,6 +3,8 @@
 //* TC = O(V + E)
 //* SC = O(V)
 
+// ---> you can use the toposort by bfs for detection the cycle
+
 bool dfs(int node, vector<vector<int>> &adj, vector<int> &vis, vector<int> &pathVis){
     vis[node] = 1;
     pathVis[node] = 1;
