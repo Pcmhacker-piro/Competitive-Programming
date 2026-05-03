@@ -3,35 +3,41 @@
 // - Time: O(n^3)
 // - Best for small graphs
 
-void FloydWarshall(int n, vector<pair<int, ll>> *adj, vector<vector<ll>> &dist) {
-    
+void floydWarshall(int n, vector<vector<ll>> &dist, vector<pii> adj[]) {
+    const ll INF = 1e18;
+
+    // initialize
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            dist[i][j] = INF;
+            if (i == j) dist[i][j] = 0;
+            else dist[i][j] = INF;
         }
-        dist[i][i] = 0;
     }
 
+    // edges
     for (int i = 0; i < n; i++) {
-        for (auto j : adj[i]) {
-            dist[i][j.first] = min(dist[i][j.first], j.second);
+        for (auto it : adj[i]) {
+            dist[i][it.first] = min(dist[i][it.first], (ll)it.second);
         }
     }
 
+    // main DP
     for (int k = 0; k < n; k++) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (dist[i][k] < INF && dist[k][j] < INF) {
-                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                    dist[i][j] = min(dist[i][j],
+                                     dist[i][k] + dist[k][j]);
                 }
             }
         }
     }
 
-    // Negative cycle detection
+    // negative cycle detection
     for (int i = 0; i < n; i++) {
         if (dist[i][i] < 0) {
             cout << "Negative Cycle detected\n";
+            return;
         }
     }
 }
