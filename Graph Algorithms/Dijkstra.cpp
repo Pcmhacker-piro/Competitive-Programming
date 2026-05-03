@@ -1,6 +1,11 @@
 /*
-    Dijkstra's Algorithm (Shortest Path)
-    Time: O((V + E) log V)
+Dijkstra's Algorithm (Shortest Path)
+✅ Works when:
+* Graph is weighted
+* All edge weights are non-negative/positive
+* Works on both DAG and cyclic graphs
+
+Time: O((V + E) log V)
 */
 #include <bits/stdc++.h>
 using namespace std;
