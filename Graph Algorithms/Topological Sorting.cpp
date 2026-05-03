@@ -73,7 +73,7 @@ void toposortDfs(vi adj[], int n){
 }
 
 
-// ================== DFS ==================
+// ================== BFS/Kahn's algorithm ==================
 //* TC = O(V + E)
 //* SC = O(V + E)
 
