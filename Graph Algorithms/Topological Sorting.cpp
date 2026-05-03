@@ -43,6 +43,7 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int uint64;
 
+//this is only possible in the DAG (directed asyclic graph)
 
 
 // ================== DFS ==================
