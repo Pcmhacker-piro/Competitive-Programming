@@ -4,6 +4,7 @@ using namespace std;
 /*
     Shortest Path in DAG using Topological Sort
     Time Complexity: O(V + E)
+    Can handle negative weights (no cycles → safe)
 */
 
 #define pii pair<int, int>
